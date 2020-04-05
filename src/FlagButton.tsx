@@ -40,6 +40,7 @@ type FlagWithSomethingProp = Pick<
   | 'withCurrencyButton'
   | 'withCallingCodeButton'
   | 'withFlagButton'
+  | 'customStyle'
   | 'placeholder'
 > & { flagSize: number }
 
@@ -55,6 +56,7 @@ const FlagWithSomething = memo(
     withCurrencyButton,
     withCallingCodeButton,
     withFlagButton,
+    customStyle,
     flagSize,
     placeholder,
   }: FlagWithSomethingProp) => {
@@ -85,7 +87,7 @@ const FlagWithSomething = memo(
             {...{ withEmoji, countryCode, withFlagButton, flagSize: flagSize! }}
           />
         ) : (
-          <FlagText>{placeholder}</FlagText>
+          <FlagText style={customStyle}>{placeholder}</FlagText>
         )}
 
         {withCountryNameButton && countryName ? (
@@ -109,6 +111,7 @@ export interface FlagButtonProps {
   withCallingCodeButton?: boolean
   withFlagButton?: boolean
   containerButtonStyle?: StyleProp<ViewStyle>
+  customStyle?: StyleProp<TextProps>
   countryCode?: CountryCode
   placeholder: string
   onOpen?(): void
@@ -122,6 +125,7 @@ export const FlagButton = ({
   withFlagButton,
   countryCode,
   containerButtonStyle,
+  customStyle,
   onOpen,
   placeholder,
 }: FlagButtonProps) => {
@@ -143,6 +147,7 @@ export const FlagButton = ({
             withCallingCodeButton,
             withCurrencyButton,
             withFlagButton,
+            customStyle,
             flagSize: flagSize!,
             placeholder,
           }}
